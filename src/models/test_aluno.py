@@ -1,5 +1,5 @@
 import unittest
-from src.models.aluno import Aluno
+from models.aluno import Aluno
 
 class TestAluno(unittest.TestCase):
     def setUp(self):

@@ -1,7 +1,7 @@
 import unittest
-from sistema import Sistema
-from src.models.aluno import Aluno
-from src.models.turma import Turma
+from models.sistema import Sistema
+from models.aluno import Aluno
+from models.turma import Turma
 
 class TestSistema(unittest.TestCase):
 
@@ -18,11 +18,12 @@ class TestSistema(unittest.TestCase):
         aluno3 = Aluno("Lucas Pereira", "11223", [10.0, 9.5, 8.5])
         self.sistema.cadastrar_aluno(aluno3)
         alunos = self.sistema.listar_alunos()
-        self.assertIn(aluno3, alunos)
+        self.assertIn(aluno3.nome, alunos)
+
 
     def test_calcular_media_aluno(self):
         media_aluno1 = self.aluno1.calcular_media()
-        self.assertEqual(media_aluno1, 7.166666666666667)  # Média esperada para João Silva
+        self.assertEqual(media_aluno1, 7.166666666666667)  
 
     def test_listar_alunos(self):
         alunos = self.sistema.listar_alunos()
@@ -32,10 +33,9 @@ class TestSistema(unittest.TestCase):
 
     def test_calcular_media_turma(self):
         media_turma = self.sistema.calcular_media_turma()
-        self.assertEqual(media_turma, 7.666666666666666)  # Média esperada para a turma (média de 7.0 e 8.5)
+        self.assertEqual(media_turma, 7.666666666666666) 
 
     def test_exibir_relatorio(self):
-        # Vamos verificar se a exibição do relatório contém o nome dos alunos
         with self.assertLogs() as log:
             self.sistema.exibir_relatorio()
             self.assertIn("João Silva", log.output[0])

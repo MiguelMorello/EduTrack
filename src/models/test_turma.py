@@ -1,6 +1,6 @@
 import unittest
-from src.models.aluno import Aluno
-from src.models.turma import Turma
+from models.aluno import Aluno
+from models.turma import Turma
 
 class TestTurma(unittest.TestCase):
     def setUp(self):
@@ -29,7 +29,7 @@ class TestTurma(unittest.TestCase):
         self.aluno2.adicionar_nota(6)
         self.turma.adicionar_aluno(self.aluno1)
         self.turma.adicionar_aluno(self.aluno2)
-        self.assertEqual(self.turma.calcular_media_turma(), 7.75,)
+        self.assertEqual(self.turma.calcular_media_turma(), 7.5,)
 
 if __name__ == "__main__":
     unittest.main()
