@@ -1,7 +1,6 @@
 import unittest
-from models.sistema import Sistema
-from models.aluno import Aluno
-from models.turma import Turma
+from src.models.main import Aluno, Turma, Sistema
+from unittest.mock import patch
 
 class TestSistema(unittest.TestCase):
 
@@ -27,6 +26,7 @@ class TestSistema(unittest.TestCase):
 
     def test_listar_alunos(self):
         alunos = self.sistema.listar_alunos()
+        print(f"Alunos retornados: {alunos}")
         self.assertEqual(len(alunos), 2)
         self.assertEqual(alunos[0].nome, "João Silva")
         self.assertEqual(alunos[1].nome, "Maria Oliveira")
@@ -36,10 +36,11 @@ class TestSistema(unittest.TestCase):
         self.assertEqual(media_turma, 7.666666666666666) 
 
     def test_exibir_relatorio(self):
-        with self.assertLogs() as log:
+        with patch('sys.stdout') as mock_stdout:
             self.sistema.exibir_relatorio()
-            self.assertIn("João Silva", log.output[0])
-            self.assertIn("Maria Oliveira", log.output[0])
+            output = mock_stdout.getvalue()
+            self.assertIn("João Silva", output)
+            self.assertIn("Maria Oliveira", output)
 
 
 if __name__ == "__main__":

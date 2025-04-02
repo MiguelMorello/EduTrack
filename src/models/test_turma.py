@@ -1,6 +1,5 @@
 import unittest
-from models.aluno import Aluno
-from models.turma import Turma
+from src.models.main import Aluno, Turma
 
 class TestTurma(unittest.TestCase):
     def setUp(self):
@@ -18,9 +17,12 @@ class TestTurma(unittest.TestCase):
             self.turma.adicionar_aluno(self.aluno1)
 
     def test_listar_alunos(self):
+        self.turma.adicionar_aluno(self.aluno1)
+        self.turma.adicionar_aluno(self.aluno2)
         resultado = self.turma.listar_alunos()
         self.assertIn("Nome: João Silva, Matrícula: 12345", resultado)
         self.assertIn("Nome: Maria Oliveira, Matrícula: 67890", resultado)
+
 
     def test_calcular_media_turma(self):
         self.aluno1.adicionar_nota(8)
